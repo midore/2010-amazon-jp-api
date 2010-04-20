@@ -1,0 +1,27 @@
+module AmazonAPI
+  module DataConfig
+    private
+    def data_path
+      '/path/to/your/data'
+    end
+  end
+  module AmazonConfig
+    private
+    def jp_url
+      jp_url = 'http://webservices.amazon.co.jp'
+    end
+    def amazon_id
+      'your-associetID'
+    end
+    def amazon_key
+      'xxxxxxxxxxxxxx'
+    end
+    def amazon_sec
+      'xxxxxxxxxxxxxx'
+    end
+  end
+end
+
+$MYAMAZON = AmazonAPI::AmazonConfig
+$MYDATACONF = AmazonAPI::DataConfig
+
