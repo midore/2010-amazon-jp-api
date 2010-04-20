@@ -1,0 +1,50 @@
+# Dependency
+ Mac OS X 10.6.3
+ ruby 1.9.1
+ Your AWS Access key, Secret key and Associates id
+
+# edit the Ruby path
+$ vi run-amazon-api.rb
+# edit config file
+$ vi config
+# line: your amazon-key, amazon-secret-key, amazon-id
+
+# Usage
+# Add a Book Object or Muisc Object to the list
+$ ./run-amazon-api.rb add 9784873113944
+$ ./run-amazon-api.rb add 0724359095226
+
+# View the list
+$ ./run-amazon-api.rb l 3
+or
+$ ./run-amazon-api.rb l 10
+or
+$ ./run-amazon-api.rb l
+#=>
+1	[0724359095226][Music][2009/08/05] Feels Like Home | Norah Jones | 2004-02-17
+2	[9784873113944][Book ][2010/04/20] プログラミング言語 Ruby | まつもと ゆきひろ / David Flanagan | 2009-01-26
+...
+Select
+# 1 + return
+SelectOption [o/i/r/n]:
+# e + return => open the text file
+# r + retrun => remove a Object form list
+# i + return => show detail of Book Object or Music Object
+# n + return => cancel run option.
+
+# Search Object
+$ ./run-amazon-api s ruby
+#=>
+1	[9784873113944][Book ][2010/04/20] プログラミング言語 Ruby | まつもと ゆきひろ / David Flanagan | 2009-01-26
+SelectOption [o/i/r/n]:
+
+# View the all ISBN
+$ ./run-amazon-api isbn
+9784873113944
+0724359095226
+...
+
+# License
+ Copyright (C) 2010 midore
+ 2010-amazon-jp-api is licensed under the GPLv2
+
