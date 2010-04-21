@@ -3,11 +3,22 @@
  ruby 1.9.1
  Your AWS Access key, Secret key and Associates id
 
-# edit the Ruby path
+# Reference
+# about force_encoding : http://yugui.jp/articles/850
+# about OpenSSL::Digest::SHA256.new : http://diaspar.jp/node/239
+#
+# about Product Advertising API : 
+# https://affiliate.amazon.co.jp/gp/advertising/api/detail/main.html
+# https://affiliate.amazon.co.jp/gp/associates/help/t126
+# http://developer.amazonwebservices.com/connect/ann.jspa?annID=442
+# 
+# Before run
+# edit Ruby path
 $ vi run-amazon-api.rb
 # edit config file
-$ vi config
-# line: your amazon-key, amazon-secret-key, amazon-id
+$ vi config # line: your amazon-key, amazon-secret-key, amazon-id
+# change mode
+$ chmod +x run-amazon-api.rb
 
 # Usage
 # Add a Book Object or Muisc Object to the list
@@ -26,7 +37,7 @@ $ ./run-amazon-api.rb l
 ...
 Select
 # 1 + return
-SelectOption [o/i/r/n]:
+SelectOption [e/i/r/n]:
 # e + return => open the text file
 # r + retrun => remove a Object form list
 # i + return => show detail of Book Object or Music Object
