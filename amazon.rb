@@ -65,17 +65,19 @@ module AmazonAPI
     end
 
     # @item object is based on amazon data hash.
-    def get_item
+    def set_item
       item_h = AmazonAccess.new(@ean).base
       return nil unless item_h
       item_h[:created] = Time.now.to_s # for import data
       @item = AwsItem.new(item_h)
-      @item_h = item_h
+      @item_h = item_h if @item
     end
 
     def item_add
+      return nil unless @item
+      return nil unless @item_h
       @h[@item.ean] = @item_h
-      save_list if @item_h
+      save_list
     end
 
     def save_list
