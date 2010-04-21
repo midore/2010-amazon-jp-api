@@ -11,12 +11,12 @@ module AmazonAPI
 
     def starter
       case @cmd
-      when 'add' then AwsDataWriter.new().list_update(@isbn)
+      when 'add' then AwsDataWriter.new(@isbn).list_update
       when 'l' then AwsDataReader.new().list_view(@opt.to_i-1)
       when 's' then AwsDataReader.new().list_search(@word)
       when 'isbn' then AwsDataReader.new().list_isbn_view
       end
-    end 
+    end
 
   end 
 
@@ -38,23 +38,22 @@ module AmazonAPI
 
   class AwsDataWriter
 
-    def initialize
+    def initialize(ean)
+      @ean = ean
       @h = load_list
       @dpath = File.join(data_path, 'db-data')
     end
 
     # new item add to the list.
-    def list_update(isbn)
-      @ean = isbn
+    def list_update
       return nil unless ean_ok?
-      get_item
-      return nil unless @item
+      set_item
       item_add
-      save_text
+      save_text if @item
     end
 
-    def item_delete(ean)
-      check = @h.delete(ean)
+    def item_delete
+      check = @h.delete(@ean)
       save_list unless check.nil?
     end
 
