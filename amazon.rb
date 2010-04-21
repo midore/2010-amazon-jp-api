@@ -164,7 +164,7 @@ module AmazonAPI
     end
 
     def item_remove(item)
-       AwsDataWriter.new().item_delete(item.ean) 
+       AwsDataWriter.new(item.ean).item_delete
     end
 
     def item_detail(item)
