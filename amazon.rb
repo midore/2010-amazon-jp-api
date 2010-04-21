@@ -144,11 +144,12 @@ module AmazonAPI
     end
 
     def choose_act
-      act = selector("Select [i/e/n]", false)
+      act = selector("Select [i/e/r/n]", false)
       return act if act
     end
 
     def item_act(act, item)
+      instance_variables.each{|i| instance_variable_set(i, nil)}
       case act
       when 'i' then item_detail(item)
       when 'e' then item_open(item)
