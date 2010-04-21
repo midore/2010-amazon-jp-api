@@ -340,21 +340,18 @@ module AmazonAPI
       begin
         timeout(sec){ans = interactive(str, opt)}
       rescue TimeoutError
-        print "Timeout. #{sec} sec.\n"
-        return nil
+        return print "Timeout. #{sec} sec.\n"
       rescue RuntimeError
-        print "Timeout. #{sec} sec.\n"
-        return nil
+        return print "Timeout. #{sec} sec.\n"
       rescue SignalException
-        print "\n"
-        return nil
+        return print "\n"
       end
-      return ans
+      return ans #unless ans.empty?
     end
 
-    def self.interactive(mess, opt)
+    def self.interactive(msg, opt)
       return false unless $stdin.tty?
-      print "#{mess}:\n"
+      print "#{msg}:\n"
       ans = $stdin.gets.chomp
       return false if /^n$|^no$/.match(ans) # n or no == stop
       return false if ans.empty?
