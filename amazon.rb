@@ -379,6 +379,8 @@ module AmazonAPI
 
     private
     def set_uri
+      # reference: http://diaspar.jp/node/239
+      # about OpenSSL::Digest::SHA256.new
       @aws_uri.path = '/onca/xml'
       req = set_query.flatten.sort.join("&")
       msg = ["GET", @aws_uri.host, @aws_uri.path, req].join("\n")
