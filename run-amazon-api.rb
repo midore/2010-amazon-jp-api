@@ -17,9 +17,11 @@ exit if w1.size > 5
 exit if w2 && w2.size > 13
 
 # load
+dir = File.dirname(File.expand_path($PROGRAM_NAME))
+$LOAD_PATH.push(dir)
+$LOAD_PATH.delete(".")
 load 'config', wrap=true
 require 'amazon'
-$LOAD_PATH.delete(".")
 
 # require
 require 'time'
