@@ -92,7 +92,7 @@ module AmazonAPI
     end
 
     def text_path
-      File.join(data_path, 'text', @item.ean + ".txt")
+      File.join(data_path, @item.ean + ".txt")
     end
 
   end
@@ -101,7 +101,7 @@ module AmazonAPI
 
     def initialize
       @ary = Array.new
-      load_base
+      load_base 
     end
 
     # print list
@@ -129,6 +129,10 @@ module AmazonAPI
     def load_base
       load_list.each{|k,v| @ary << AwsItem.new(v)}
       @ary = @ary.sort_by{|i| i.created.to_s}.reverse[0..10]
+      if @ary.empty?
+        print "Error: data is empty.\n" if  @ary.empty?
+        exit
+      end
     end
 
     def choose_option
@@ -173,7 +177,7 @@ module AmazonAPI
 
     def item_open(item)
       instance_variables.each{|i| instance_variable_set(i,nil)}
-      f = File.join(data_path, 'text', item.ean + ".txt")
+      f = File.join(data_path, item.ean + ".txt")
       return nil unless File.exist?(f)
       exec("vim #{f}")
     end
@@ -305,11 +309,13 @@ module AmazonAPI
 
     def load_list
       path = File.join(data_path, 'db-data')
-      raise "Error: load_data_error\n" unless path 
-      list = m_reader(path)
-      raise "Error: load_data_error\n" unless list
-      raise "Error: data EMPTY\n" if list.empty?
-      return list
+      unless File.exist?(path)
+        return Hash.new
+      else
+        return m_reader(path)
+        #p list
+        #print "-----------------------------\n"
+      end
     end
 
   end
