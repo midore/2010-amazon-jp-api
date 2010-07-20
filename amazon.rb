@@ -18,21 +18,21 @@ module AmazonAPI
       end
     end
 
-  end 
+  end
 
   class AmazonAccess
 
     def initialize(ean)
       @ean = ean 
       @aws_uri = URI.parse(jp_url)
-    end 
+    end
 
     def base
       set_uri
       xml = access
       data = AwsXML.new(xml, amazon_id).base if xml 
       return data
-    end 
+    end
 
   end
 
@@ -281,15 +281,10 @@ module AmazonAPI
     end
 
     def seturl
-      url = exurl(@url.text)
-      return nil unless url
+      return nil unless @url
       return nil unless @aws_id
-      return url + "?tag=#{@aws_id}"
-    end
-
-    def exurl(string)
-      str = string.gsub(/%([0-9a-fA-F]{2})/){[$1.delete('%')].pack("H*")}
-      return str if str.valid_encoding?
+      url = @url.text + "?tag=#{@aws_id}"
+      return url
     end
 
   end
